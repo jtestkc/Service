@@ -52,9 +52,10 @@ phases:
 
 
 artifacts:
-  files: service1.json
-         service2.json
-         service3.json
-         service4.json
-         service5.json
-         service6.json
+  files: 
+    - service1.json
+    - service2.json
+    - service3.json
+    - service4.json
+    - service5.json
+    - service6.json
