@@ -1,0 +1,60 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - echo $AWS_DEFAULT_REGION
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v4j2a7d2
+      - REPOSITORY_NAME="ecr-repo"      
+      - REPOSITORY_URI=public.ecr.aws/v4j2a7d2/ecr-repo
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+  build:
+    commands:
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_NAME:service1 -f ./service1/dockerfile .
+      - docker build -t $REPOSITORY_NAME:service2 -f ./service2/dockerfile .
+      - docker build -t $REPOSITORY_NAME:service3 -f ./service3/dockerfile .
+      - docker build -t $REPOSITORY_NAME:service4 -f ./service4/dockerfile .
+      - docker build -t $REPOSITORY_NAME:service5 -f ./service5/dockerfile .
+      - docker build -t $REPOSITORY_NAME:service6 -f ./service6/dockerfile .
+      
+      
+      - docker tag $REPOSITORY_NAME:service1 $REPOSITORY_URI:service1
+      - docker tag $REPOSITORY_NAME:service2 $REPOSITORY_URI:service2
+      - docker tag $REPOSITORY_NAME:service3 $REPOSITORY_URI:service3
+      - docker tag $REPOSITORY_NAME:service4 $REPOSITORY_URI:service4
+      - docker tag $REPOSITORY_NAME:service5 $REPOSITORY_URI:service5
+      - docker tag $REPOSITORY_NAME:service6 $REPOSITORY_URI:service6
+
+
+      #- docker tag $REPOSITORY_NAME:latest $REPOSITORY_URI:$IMAGE_TAG
+
+
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI:service1
+      - docker push $REPOSITORY_URI:service2
+      - docker push $REPOSITORY_URI:service3
+      - docker push $REPOSITORY_URI:service4
+      - docker push $REPOSITORY_URI:service5
+      - docker push $REPOSITORY_URI:service6
+      
+      #- docker push $REPOSITORY_URI:$IMAGE_TAG
+
+      - printf '[{"name":"service1","imageUri":"%s"}]' $REPOSITORY_URI:service1 > service1.json
+      - printf '[{"name":"service2","imageUri":"%s"}]' $REPOSITORY_URI:service1 > service2.json
+      - printf '[{"name":"service3","imageUri":"%s"}]' $REPOSITORY_URI:service1 > service3.json
+      - printf '[{"name":"service4","imageUri":"%s"}]' $REPOSITORY_URI:service1 > service4.json
+      - printf '[{"name":"service5","imageUri":"%s"}]' $REPOSITORY_URI:service1 > service5.json
+      - printf '[{"name":"service6","imageUri":"%s"}]' $REPOSITORY_URI:service1 > service6.json
+
+
+artifacts:
+  files: service1.json
+         service2.json
+         service3.json
+         service4.json
+         service5.json
+         service6.json
