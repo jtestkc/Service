@@ -13,12 +13,13 @@ phases:
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_NAME:service1 -f ./service1/dockerfile .
-      - docker build -t $REPOSITORY_NAME:service2 -f ./service2/dockerfile .
-      - docker build -t $REPOSITORY_NAME:service3 -f ./service3/dockerfile .
-      - docker build -t $REPOSITORY_NAME:service4 -f ./service4/dockerfile .
-      - docker build -t $REPOSITORY_NAME:service5 -f ./service5/dockerfile .
-      - docker build -t $REPOSITORY_NAME:service6 -f ./service6/dockerfile .
+      - docker build -t $REPOSITORY_NAME:service1 --build-arg file_path=./service1/index.html .
+      - docker build -t $REPOSITORY_NAME:service2 --build-arg file_path=./service2/index.html .
+      - docker build -t $REPOSITORY_NAME:service3 --build-arg file_path=./service3/index.html .
+      - docker build -t $REPOSITORY_NAME:service4 --build-arg file_path=./service4/index.html .
+      - docker build -t $REPOSITORY_NAME:service5 --build-arg file_path=./service5/index.html .
+      - docker build -t $REPOSITORY_NAME:service6 --build-arg file_path=./service6/index.html .
+
       
       
       - docker tag $REPOSITORY_NAME:service1 $REPOSITORY_URI:service1
