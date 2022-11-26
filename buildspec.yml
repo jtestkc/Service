@@ -35,12 +35,12 @@ phases:
 
   post_build:
     commands:
-      - docker push $REPOSITORY_URI:service1
-      - docker push $REPOSITORY_URI:service2
-      - docker push $REPOSITORY_URI:service3
-      - docker push $REPOSITORY_URI:service4
-      - docker push $REPOSITORY_URI:service5
-      - docker push $REPOSITORY_URI:service6
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service1
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service2
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service3
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service4
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service5
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service6
       
       #- docker push $REPOSITORY_URI:$IMAGE_TAG
 
