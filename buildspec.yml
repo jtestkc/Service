@@ -35,28 +35,28 @@ phases:
 
   post_build:
     commands:
-      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service1
-      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service2
-      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service3
-      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service4
-      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service5
-      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service66
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service1:latest
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service2:latest
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service3:latest
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service4:latest
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service5:latest
+      - docker push $REPOSITORY_URI:public.ecr.aws/l0e8f8v7/ecr/service6:latest
       
       #- docker push $REPOSITORY_URI:$IMAGE_TAG
 
-      - printf '[{"name":"service1","imageUri":"%s"}]' $REPOSITORY_URI:service1 > service1.json
-      - printf '[{"name":"service2","imageUri":"%s"}]' $REPOSITORY_URI:service2 > service2.json
-      - printf '[{"name":"service3","imageUri":"%s"}]' $REPOSITORY_URI:service3 > service3.json
-      - printf '[{"name":"service4","imageUri":"%s"}]' $REPOSITORY_URI:service4 > service4.json
-      - printf '[{"name":"service5","imageUri":"%s"}]' $REPOSITORY_URI:service5 > service5.json
-      - printf '[{"name":"service6","imageUri":"%s"}]' $REPOSITORY_URI:service6 > service6.json
+      - printf '[{"name":"service1","imageUri":"%s"}]' $REPOSITORY_URI:service1 > imagedefinitions1.json
+      - printf '[{"name":"service2","imageUri":"%s"}]' $REPOSITORY_URI:service2 > imagedefinitions2.json
+      - printf '[{"name":"service3","imageUri":"%s"}]' $REPOSITORY_URI:service3 > imagedefinitions3.json
+      - printf '[{"name":"service4","imageUri":"%s"}]' $REPOSITORY_URI:service4 > imagedefinitions4.json
+      - printf '[{"name":"service5","imageUri":"%s"}]' $REPOSITORY_URI:service5 > imagedefinitions5.json
+      - printf '[{"name":"service6","imageUri":"%s"}]' $REPOSITORY_URI:service6 > imagedefinitions6.json
 
 
 artifacts:
   files: 
-    - service1.json
-    - service2.json
-    - service3.json
-    - service4.json
-    - service5.json
-    - service6.json
+    - imagedefinitions1.json
+    - imagedefinitions2.json
+    - imagedefinitions3.json
+    - imagedefinitions4.jsonn
+    - imagedefinitions5.json
+    - imagedefinitions6.json
